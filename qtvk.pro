@@ -2,7 +2,7 @@ TEMPLATE = lib
 VERSION = 1.0
 TARGET = qtvk
 
-QT +=
+QT += qml
 android:QT += androidextras
 
 CONFIG += c++11
@@ -20,8 +20,14 @@ unix:!android {
 }
 
 
-HEADERS +=
+HEADERS += \
+    QtVk.h
 
-SOURCES +=
+SOURCES += \
+    QtVk.cpp \
+    QtVk-android.cpp
 
-OTHER_FILES +=
+JAVA_FILES = Android/src/org/ddwarf/vk/QtVkBinding.java
+
+OTHER_FILES += \
+    $$JAVA_FILES
