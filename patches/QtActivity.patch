@@ -1,0 +1,40 @@
+--- original
++++ modifed
+@@ -53,6 +53,7 @@
+ import org.kde.necessitas.ministro.IMinistroCallback;
+ 
+ import android.app.Activity;
++import android.support.v4.app.FragmentActivity;
+ import android.app.AlertDialog;
+ import android.app.Dialog;
+ import android.content.ComponentName;
+@@ -96,7 +97,7 @@
+ //@ANDROID-11
+ 
+ 
+-public class QtActivity extends Activity
++public class QtActivity extends FragmentActivity
+ {
+     private final static int MINISTRO_INSTALL_REQUEST_CODE = 0xf3ee; // request code used to know when Ministro instalation is finished
+     private static final int MINISTRO_API_LEVEL = 5; // Ministro api level (check IMinistro.aidl file)
+@@ -1256,17 +1257,17 @@
+     //---------------------------------------------------------------------------
+ 
+     @Override
+-    public Object onRetainNonConfigurationInstance()
++    public Object onRetainCustomNonConfigurationInstance()
+     {
+         QtApplication.InvokeResult res = QtApplication.invokeDelegate();
+         if (res.invoked)
+             return res.methodReturns;
+         else
+-            return super.onRetainNonConfigurationInstance();
++            return super.onRetainCustomNonConfigurationInstance();
+     }
+     public Object super_onRetainNonConfigurationInstance()
+     {
+-        return super.onRetainNonConfigurationInstance();
++        return super.onRetainCustomNonConfigurationInstance();
+     }
+     //---------------------------------------------------------------------------
+ 
