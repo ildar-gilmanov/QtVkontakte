@@ -69,9 +69,7 @@ public class QtVkBinding
             }
         });
 
-        FragmentTransaction ft = m_activity.getFragmentManager().beginTransaction();
-        ft.add(shareDialog, "VK_SHARE_DIALOG");
-        ft.commit();
+        shareDialog.show(m_activity.getSupportFragmentManager(), "VK_SHARE_DIALOG");
     }
 
     // Emit signal for operation done
