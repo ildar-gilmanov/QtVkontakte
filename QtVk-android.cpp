@@ -99,6 +99,25 @@ static JNINativeMethod methods[]
     {"operationError", "(Ljava/lang/String;Ljava/lang/String;)V", (void*)(fromJavaOnOperationError)}
 };
 
+extern "C"
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *)
+{
+    JNIEnv *env;
+    if(vm->GetEnv(reinterpret_cast<void **>(&env), JNI_VERSION_1_4) != JNI_OK)
+    {
+        return JNI_FALSE;
+    }
+
+    jclass clazz = env->FindClass("org/ddwarf/vk/QtVkBinding");
+
+    if(env->RegisterNatives(clazz, methods, sizeof(methods) / sizeof(methods[0])) < 0)
+    {
+        return JNI_FALSE;
+    }
+
+    return JNI_VERSION_1_4;
+}
+
 } // namespace Social
 } // namespace DDwarf
 
