@@ -22,15 +22,15 @@ QtVk {
 id: qtVk
 
 onOperationCompleted: {
-    console.info("Operation '" operation + "' was completed")
+    console.info("Operation '" + operation + "' was completed")
 }
 
 onOperationCancel: {
-    console.info("Operation '" operation + "' was canceled")
+    console.info("Operation '" + operation + "' was canceled")
 }
 
 onOperationError: {
-    console.info("Operation '" operation + "' was failed. " + error)
+    console.info("Operation '" + operation + "' was failed. " + error)
 }
 }
 ```
