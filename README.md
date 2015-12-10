@@ -13,7 +13,24 @@ In C++ you have to call `QtVk::initStatic()`.
 Using:
 ------
 
-In Qml:  
-`QtVk {  
-id: qtVk  
-}`
+In Qml:
+
+```javascript
+import org.ddwarf.social 1.0
+
+QtVk {
+id: qtVk
+
+onOperationCompleted: {
+    console.info("Operation '" operation + "' was completed")
+}
+
+onOperationCancel: {
+    console.info("Operation '" operation + "' was canceled")
+}
+
+onOperationError: {
+    console.info("Operation '" operation + "' was failed. " + error)
+}
+}
+```
