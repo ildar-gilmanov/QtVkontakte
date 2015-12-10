@@ -54,6 +54,14 @@ QObject *QtVk::qtVkProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
     return m_instance;
 }
 
+void QtVk::openShareDialog(const QString &textToPost,
+                           const QStringList *photoLinks,
+                           const QVariantList *photos,
+                           const QString &linkTitle,
+                           const QString &linkUrl)
+{
+}
+
 } // namespace Social
 } // namespace DDwarf
 

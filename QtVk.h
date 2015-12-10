@@ -31,6 +31,20 @@ public:
 
 public slots:
 
+    /**
+     * Show dialog for sharing
+     * @param textToPost Post text. User can change that text
+     * @param photoLinks Array of already uploaded photos from VK, that will be attached to post
+     * @param photos Images that will be uploaded with post. Supported types: QPixmap, QQuickItemGrabResult
+     * @param linkTitle A small description for your link
+     * @param linkUrl Url that link follows
+     */
+    void openShareDialog(const QString &textToPost,
+                         const QStringList *photoLinks,
+                         const QVariantList *photos,
+                         const QString &linkTitle,
+                         const QString &linkUrl);
+
 signals:
     /**
      * Emitted when an operation is completed
