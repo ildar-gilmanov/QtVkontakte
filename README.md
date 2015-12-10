@@ -7,8 +7,8 @@ Before using this library you have to inherit `QtActivity` from `android.support
 Just navigate to /path-to-qt/android_armv[5,7]/src/android/java/src/org/qtproject/qt5/android/bindings/ and execute in command line:  
 `$ patch QtActivity.java /path-to-qtvkontakte/patches/QtActivity.patch`  
 
-In java you have to call `QtVkBinding.onCreate(this)` method inside the onCreate of main Activity.  
-In c++ you have to call `QtVk::initStatic()`.
+In Java you have to call `QtVkBinding.onCreate(this)` method inside the onCreate of main Activity.  
+In C++ you have to call `QtVk::initStatic()`.
 
 Using:
 ------
