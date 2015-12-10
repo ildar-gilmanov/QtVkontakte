@@ -18,19 +18,22 @@ In Qml:
 ```javascript
 import org.ddwarf.social 1.0
 
-QtVk {
-id: qtVk
+ApplicationWindow {
 
-onOperationCompleted: {
-    console.info("Operation '" + operation + "' was completed")
-}
+    QtVk {
+        id: qtVk
 
-onOperationCancel: {
-    console.info("Operation '" + operation + "' was canceled")
-}
+        onOperationCompleted: {
+            console.info("Operation '" + operation + "' was completed")
+        }
 
-onOperationError: {
-    console.info("Operation '" + operation + "' was failed. " + error)
-}
+        onOperationCancel: {
+            console.info("Operation '" + operation + "' was canceled")
+        }
+
+        onOperationError: {
+            console.info("Operation '" + operation + "' was failed. " + error)
+        }
+    }
 }
 ```
