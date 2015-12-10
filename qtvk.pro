@@ -27,7 +27,7 @@ SOURCES += \
     QtVk.cpp \
     QtVk-android.cpp
 
-JAVA_FILES = Android/src/org/ddwarf/vk/QtVkBinding.java
+JAVA_FILES = android/src/org/ddwarf/vk/QtVkBinding.java
 
 OTHER_FILES += \
     $$JAVA_FILES
