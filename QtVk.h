@@ -72,12 +72,18 @@ private:
     explicit QtVk(QObject *parent = 0);
     ~QtVk();
 
+    Q_DISABLE_COPY(QtVk)
+
     /**
      * Singleton type provider function for Qt Quick
      */
     static QObject *qtVkProvider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
-    Q_DISABLE_COPY(QtVk)
+    void openShareDialog(const QString &textToPost,
+                         const QStringList *photoLinks,
+                         const QList<QPixmap> &photos,
+                         const QString &linkTitle,
+                         const QString &linkUrl);
 };
 
 } // namespace Social

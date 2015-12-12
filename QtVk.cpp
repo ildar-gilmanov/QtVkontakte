@@ -8,6 +8,8 @@
  */
 
 #include "QtVk.h"
+#include <QPixmap>
+#include <QtQuick/QQuickItemGrabResult>
 #include <QDebug>
 
 namespace DDwarf {
@@ -60,6 +62,32 @@ void QtVk::openShareDialog(const QString &textToPost,
                            const QString &linkTitle,
                            const QString &linkUrl)
 {
+    QList<QPixmap> pixmapList;
+
+    for(QVariantList::const_iterator it = photos->cbegin(); it != photos->cend(); ++it)
+    {
+        const QVariant &var = *it;
+
+        if(var.canConvert<QPixmap>())
+        {
+            pixmapList.push_back(var.value<QPixmap>());
+        }
+        else if(var.canConvert<QQuickItemGrabResult*>())
+        {
+            QQuickItemGrabResult *grabResult = var.value<QQuickItemGrabResult*>();
+            pixmapList.push_back(QPixmap::fromImage(grabResult->image()));
+        }
+        else
+        {
+            qWarning() << "Incorrect value for photos";
+        }
+    }
+
+    openShareDialog(textToPost,
+                    photoLinks,
+                    pixmapList,
+                    linkTitle,
+                    linkUrl);
 }
 
 } // namespace Social
