@@ -20,8 +20,8 @@ import org.ddwarf.social 1.0
 
 ApplicationWindow {
 
-    QtVk {
-        id: qtVk
+    Connections {
+        target: QtVk
 
         onOperationCompleted: {
             console.info("Operation '" + operation + "' was completed")
