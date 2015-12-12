@@ -3,7 +3,6 @@ VERSION = 1.0
 TARGET = qtvk
 
 QT += qml
-android:QT += androidextras
 
 CONFIG += c++11
 INCLUDEPATH +=
@@ -12,22 +11,31 @@ isEmpty(PREFIX) {
     PREFIX = /usr/local/
 }
 
-
 unix:!android {
     target.path = $$(PREFIX)
 
     INSTALLS += target
 }
 
-
 HEADERS += \
     QtVk.h
 
 SOURCES += \
-    QtVk.cpp \
-    QtVk-android.cpp
+    QtVk.cpp
 
-JAVA_FILES = android/src/org/ddwarf/vk/QtVkBinding.java
+android {
+    QT += androidextras
+    SOURCES += QtVk-android.cpp
 
-OTHER_FILES += \
-    $$JAVA_FILES
+    JAVA_FILES.path = android/src/org/ddwarf/vk/
+    JAVA_FILES.files += $$files(android/src/org/ddwarf/vk/*)
+
+    INSTALLS += JAVA_FILES
+
+    OTHER_FILES += \
+        $$JAVA_FILES
+
+} else {
+    SOURCES += \
+        QtVk-desktop.cpp
+}
