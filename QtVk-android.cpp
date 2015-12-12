@@ -8,11 +8,71 @@
  */
 
 #include "QtVk.h"
-#include <QDebug>
+#include <QPixmap>
 #include <QtAndroidExtras>
+#include <QDebug>
 
 namespace DDwarf {
 namespace Social {
+
+static const QString jClassName = "org/ddwarf/vk/QtVkBinding";
+
+static jobjectArray createStringList(QAndroidJniEnvironment &env, const QStringList *stringList)
+{
+    // Get the string class
+    jclass stringClass = env->FindClass("Ljava/lang/String");
+
+    // Check if we properly got the string class
+    if(!stringClass)
+    {
+        qWarning() << "Can not get string class";
+        return nullptr;
+    }
+
+    jobjectArray stringArray = env->NewObjectArray(stringList->size(), stringClass, nullptr);
+
+    for(int i = 0; i < stringList->size(); ++i)
+    {
+        env->SetObjectArrayElement(stringArray,
+                                   i,
+                                   QAndroidJniObject::fromString(stringList->at(i))
+                                   .object<jstring>());
+    }
+
+    return stringArray;
+}
+
+static jobjectArray createPixmapList(QAndroidJniEnvironment &env, const QList<QPixmap> &photos)
+{
+    // Get the byte array class
+    jclass byteArrayClass = env->FindClass("[B");
+
+    // Check if we properly got the byte array class
+    if(!byteArrayClass)
+    {
+        qWarning() << "Can not get byte array class";
+        return nullptr;
+    }
+
+    // Create the 2D array
+    jobjectArray photosArray = env->NewObjectArray(photos.size(), byteArrayClass, nullptr);
+
+    // Go through the firs dimension and add the second dimension arrays
+    for(int i = 0; i < photos.size(); ++i)
+    {
+        QByteArray imgData;
+        QBuffer buffer(&imgData);
+        buffer.open(QIODevice::WriteOnly);
+        photos.at(i).save(&buffer, "PNG");
+
+        jbyteArray imgBytes = env->NewByteArray(imgData.size());
+        env->SetByteArrayRegion(imgBytes, 0, imgData.size(), (jbyte*)imgData.constData());
+        env->SetObjectArrayElement(photosArray, i, imgBytes);
+        env->DeleteLocalRef(imgBytes);
+    }
+
+    return photosArray;
+}
 
 void QtVk::openShareDialog(const QString &textToPost,
                            const QStringList *photoLinks,
@@ -46,6 +106,45 @@ void QtVk::openShareDialog(const QString &textToPost,
                       .arg(linkUrl));
 
     qInfo() << message;
+
+    QAndroidJniEnvironment env;
+
+    jobjectArray photoLinksArray = nullptr;
+
+    if(photoLinks && !photoLinks->isEmpty())
+    {
+        photoLinksArray = createStringList(env, photoLinks);
+
+        if(!photoLinksArray)
+        {
+            qWarning() << "Can not create photo links array";
+            return;
+        }
+    }
+
+    jobjectArray photosArray = nullptr;
+
+    if(!photos.isEmpty())
+    {
+        photosArray = createPixmapList(env, photos);
+
+        if(!photosArray)
+        {
+            qWarning() << "Can not create photos array";
+            return;
+        }
+    }
+
+    // call the java implementation
+    QAndroidJniObject::callStaticMethod<void>(
+                jClassName.toLatin1().data(),
+                "openShareDialog",
+                "(java/lang/String;[java.lang.String;[[B;java/lang/String;java/lang/String)V",
+                QAndroidJniObject::fromString(textToPost).object<jstring>(),
+                photoLinksArray,
+                photosArray,
+                QAndroidJniObject::fromString(linkTitle).object<jstring>(),
+                QAndroidJniObject::fromString(linkUrl).object<jstring>());
 }
 
 static void fromJavaOnOperationCompleted(JNIEnv *env,
