@@ -17,10 +17,10 @@ namespace Social {
 
 static const QString jClassName = "org/ddwarf/vk/QtVkBinding";
 
-static jobjectArray createStringList(QAndroidJniEnvironment &env, const QStringList *stringList)
+static jobjectArray createStringList(QAndroidJniEnvironment &env, const QStringList &stringList)
 {
     // Get the string class
-    jclass stringClass = env->FindClass("Ljava/lang/String");
+    jclass stringClass = env->FindClass("java/lang/String");
 
     // Check if we properly got the string class
     if(!stringClass)
@@ -29,13 +29,13 @@ static jobjectArray createStringList(QAndroidJniEnvironment &env, const QStringL
         return nullptr;
     }
 
-    jobjectArray stringArray = env->NewObjectArray(stringList->size(), stringClass, nullptr);
+    jobjectArray stringArray = env->NewObjectArray(stringList.size(), stringClass, nullptr);
 
-    for(int i = 0; i < stringList->size(); ++i)
+    for(int i = 0; i < stringList.size(); ++i)
     {
         env->SetObjectArrayElement(stringArray,
                                    i,
-                                   QAndroidJniObject::fromString(stringList->at(i))
+                                   QAndroidJniObject::fromString(stringList.at(i))
                                    .object<jstring>());
     }
 
@@ -75,14 +75,14 @@ static jobjectArray createPixmapList(QAndroidJniEnvironment &env, const QList<QP
 }
 
 void QtVk::openShareDialog(const QString &textToPost,
-                           const QStringList *photoLinks,
+                           const QStringList &photoLinks,
                            const QList<QPixmap> &photos,
                            const QString &linkTitle,
                            const QString &linkUrl)
 {
     QString message = QString("openShareDialog: textToPost: '%1' photoLinks: ").arg(textToPost);
 
-    for(QStringList::const_iterator it = photoLinks->cbegin(); it != photoLinks->cend(); ++it)
+    for(QStringList::const_iterator it = photoLinks.cbegin(); it != photoLinks.cend(); ++it)
     {
         message.push_back(*it);
         message.push_back(", ");
@@ -111,7 +111,7 @@ void QtVk::openShareDialog(const QString &textToPost,
 
     jobjectArray photoLinksArray = nullptr;
 
-    if(photoLinks && !photoLinks->isEmpty())
+    if(!photoLinks.isEmpty())
     {
         photoLinksArray = createStringList(env, photoLinks);
 
@@ -139,7 +139,7 @@ void QtVk::openShareDialog(const QString &textToPost,
     QAndroidJniObject::callStaticMethod<void>(
                 jClassName.toLatin1().data(),
                 "openShareDialog",
-                "(java/lang/String;[java.lang.String;[[B;java/lang/String;java/lang/String)V",
+                "(Ljava/lang/String;[Ljava/lang/String;[[BLjava/lang/String;Ljava/lang/String;)V",
                 QAndroidJniObject::fromString(textToPost).object<jstring>(),
                 photoLinksArray,
                 photosArray,
@@ -227,7 +227,7 @@ static void fromJavaOnOperationError(JNIEnv *env, jobject thiz, jstring operatio
 
 static JNINativeMethod methods[]
 {
-    {"operationCompleted", "(Ljava/lang/String;[Ljava/lang/String;)V",(void*)(fromJavaOnOperationCompleted)},
+    {"operationComplete", "(Ljava/lang/String;[Ljava/lang/String;)V",(void*)(fromJavaOnOperationCompleted)},
     {"operationCancel", "(Ljava/lang/String;)V", (void*)(fromJavaOnOperationCancel)},
     {"operationError", "(Ljava/lang/String;Ljava/lang/String;)V", (void*)(fromJavaOnOperationError)}
 };

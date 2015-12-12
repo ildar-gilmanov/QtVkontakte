@@ -15,14 +15,14 @@ namespace DDwarf {
 namespace Social {
 
 void QtVk::openShareDialog(const QString &textToPost,
-                           const QStringList *photoLinks,
+                           const QStringList &photoLinks,
                            const QList<QPixmap> &photos,
                            const QString &linkTitle,
                            const QString &linkUrl)
 {
     QString message = QString("openShareDialog: textToPost: '%1' photoLinks: ").arg(textToPost);
 
-    for(QStringList::const_iterator it = photoLinks->cbegin(); it != photoLinks->cend(); ++it)
+    for(QStringList::const_iterator it = photoLinks.cbegin(); it != photoLinks.cend(); ++it)
     {
         message.push_back(*it);
         message.push_back(", ");

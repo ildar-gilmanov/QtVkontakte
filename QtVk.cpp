@@ -57,14 +57,31 @@ QObject *QtVk::qtVkProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 }
 
 void QtVk::openShareDialog(const QString &textToPost,
-                           const QStringList *photoLinks,
-                           const QVariantList *photos,
+                           const QVariantList &photoLinks,
+                           const QVariantList &photos,
                            const QString &linkTitle,
                            const QString &linkUrl)
 {
+    QStringList photoStringLinks;
+
+    for(QVariantList::const_iterator it = photoLinks.cbegin(); it != photoLinks.cend(); ++it)
+    {
+        const QVariant &var = *it;
+
+        if(var.canConvert<QString>())
+        {
+            photoStringLinks.push_back(var.toString());
+        }
+        else
+        {
+            qWarning() << "Incorrect value for photos";
+            return;
+        }
+    }
+
     QList<QPixmap> pixmapList;
 
-    for(QVariantList::const_iterator it = photos->cbegin(); it != photos->cend(); ++it)
+    for(QVariantList::const_iterator it = photos.cbegin(); it != photos.cend(); ++it)
     {
         const QVariant &var = *it;
 
@@ -80,11 +97,12 @@ void QtVk::openShareDialog(const QString &textToPost,
         else
         {
             qWarning() << "Incorrect value for photos";
+            return;
         }
     }
 
     openShareDialog(textToPost,
-                    photoLinks,
+                    photoStringLinks,
                     pixmapList,
                     linkTitle,
                     linkUrl);

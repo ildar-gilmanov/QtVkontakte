@@ -20,7 +20,7 @@ public class QtVkBinding
     /**
      * This has to be called inside the onCreate of main Activity
      */
-    static public void onCreate(QtActivity activity) {
+    public static void onCreate(QtActivity activity) {
         m_activity = activity;
     }
 
@@ -32,7 +32,7 @@ public class QtVkBinding
      * @param linkTitle A small description for your link
      * @param linkUrl Url that link follows
      */
-    public void openShareDialog(java.lang.String textToPost,
+    public static void openShareDialog(java.lang.String textToPost,
                                 java.lang.String[] photoLinks,
                                 byte[][] photos,
                                 java.lang.String linkTitle,

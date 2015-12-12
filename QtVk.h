@@ -40,8 +40,8 @@ public slots:
      * @param linkUrl Url that link follows
      */
     void openShareDialog(const QString &textToPost,
-                         const QStringList *photoLinks,
-                         const QVariantList *photos,
+                         const QVariantList &photoLinks,
+                         const QVariantList &photos,
                          const QString &linkTitle,
                          const QString &linkUrl);
 
@@ -80,7 +80,7 @@ private:
     static QObject *qtVkProvider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
     void openShareDialog(const QString &textToPost,
-                         const QStringList *photoLinks,
+                         const QStringList &photoLinks,
                          const QList<QPixmap> &photos,
                          const QString &linkTitle,
                          const QString &linkUrl);
