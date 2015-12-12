@@ -2,7 +2,7 @@ TEMPLATE = lib
 VERSION = 1.0
 TARGET = qtvk
 
-QT += qml
+QT += qml quick
 
 CONFIG += c++11
 INCLUDEPATH +=
@@ -26,16 +26,12 @@ SOURCES += \
 android {
     QT += androidextras
     SOURCES += QtVk-android.cpp
-
-    JAVA_FILES.path = android/src/org/ddwarf/vk/
-    JAVA_FILES.files += $$files(android/src/org/ddwarf/vk/*)
-
-    INSTALLS += JAVA_FILES
-
-    OTHER_FILES += \
-        $$JAVA_FILES
-
 } else {
     SOURCES += \
         QtVk-desktop.cpp
 }
+
+JAVA_FILES = android/src/org/ddwarf/vk/QtVkBinding.java
+
+OTHER_FILES += \
+    $$JAVA_FILES
