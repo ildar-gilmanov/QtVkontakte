@@ -158,28 +158,32 @@ static void fromJavaOnOperationCompleted(JNIEnv *env,
     {
         QString operationString = QAndroidJniObject(operation).toString();
         QVariantMap dataMap;
-        int count = env->GetArrayLength(data);
 
-        for(int i = 0; i < count; i = i + 2)
+        if(data)
         {
-            QAndroidJniObject key(env->GetObjectArrayElement(data, i));
-            QAndroidJniObject value;
+            int count = env->GetArrayLength(data);
 
-            if((i + 1) < count)
+            for(int i = 0; i < count; i = i + 2)
             {
-                value = env->GetObjectArrayElement(data, i + 1);
-            }
+                QAndroidJniObject key(env->GetObjectArrayElement(data, i));
+                QAndroidJniObject value;
 
-            QString qkey = key.toString();
+                if((i + 1) < count)
+                {
+                    value = env->GetObjectArrayElement(data, i + 1);
+                }
 
-            if(qkey.endsWith(":list"))
-            {
-                qkey.chop(5);
-                dataMap[qkey] = value.toString().split(',', QString::SkipEmptyParts);
-            }
-            else
-            {
-                dataMap[qkey] = value.toString();
+                QString qkey = key.toString();
+
+                if(qkey.endsWith(":list"))
+                {
+                    qkey.chop(5);
+                    dataMap[qkey] = value.toString().split(',', QString::SkipEmptyParts);
+                }
+                else
+                {
+                    dataMap[qkey] = value.toString();
+                }
             }
         }
 
