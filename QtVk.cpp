@@ -3,8 +3,8 @@
  * @brief
  * @details
  * @date Created on 08.12.2015
- * @copyright 2015 DDwarf LLC, <gil_ildar@mail.ru>
- * @author Gilmanov Ildar <gil_ildar@mail.ru>
+ * @copyright 2015 DDwarf LLC, <dev@ddwarf.org>
+ * @author Gilmanov Ildar <dev@ddwarf.org>
  */
 
 #include "QtVk.h"
