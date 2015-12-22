@@ -1,6 +1,6 @@
 TEMPLATE = lib
 VERSION = 1.0
-TARGET = qtvk
+TARGET = ddwarf-qtvk
 
 QT += qml quick
 
