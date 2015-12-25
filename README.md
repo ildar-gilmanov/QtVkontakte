@@ -37,3 +37,13 @@ ApplicationWindow {
     }
 }
 ```
+
+Developers
+----------
+
+1) Gilmanov Ildar
+- Skype: gilmanov.ildar
+- Facebook: https://www.facebook.com/gilmanov.ildar
+- Vk: https://vk.com/gilmanov_ildar
+- GitHub: https://github.com/gilmanov-ildar
+- EMail: dev[at]ddwarf.org
