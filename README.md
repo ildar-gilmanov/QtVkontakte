@@ -10,8 +10,8 @@ Just navigate to /path-to-qt/android_armv[5,7]/src/android/java/src/org/qtprojec
 In Java you have to call `QtVkBinding.onCreate(this)` method inside the onCreate of main Activity.  
 In C++ you have to call `QtVk::initStatic()`.
 
-Using:
-------
+Using
+-----
 
 In Qml:
 
