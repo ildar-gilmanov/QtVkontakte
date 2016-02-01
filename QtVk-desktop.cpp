@@ -11,6 +11,11 @@
 #include <QPixmap>
 #include <QDebug>
 
+// Ubuntu SDK do not have qInfo
+#ifndef qInfo
+#define qInfo qDebug
+#endif
+
 namespace DDwarf {
 namespace Social {
 
