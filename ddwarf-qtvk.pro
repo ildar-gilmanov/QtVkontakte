@@ -7,6 +7,8 @@ QT += qml quick
 CONFIG += c++11
 INCLUDEPATH +=
 
+macx: QMAKE_SONAME_PREFIX = @executable_path/../Frameworks
+
 isEmpty(PREFIX) {
     PREFIX = /usr/local/
 }
