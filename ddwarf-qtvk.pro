@@ -34,7 +34,9 @@ android {
 }
 
 JAVA_FILES = android/src/org/ddwarf/vk/QtVkBinding.java
+PATCHES = $$files(patches/*)
 
 OTHER_FILES += \
     README.md \
+    $$PATCHES
     $$JAVA_FILES
