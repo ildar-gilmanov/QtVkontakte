@@ -40,3 +40,5 @@ OTHER_FILES += \
     README.md \
     $$PATCHES
     $$JAVA_FILES
+
+include(pvs-studio.pri)
