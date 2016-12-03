@@ -3,6 +3,7 @@ pvs_studio.output = true
 pvs_studio.cxxflags = -std=c++11
 pvs_studio.sources = $${SOURCES}
 
+SUPPRESS_WARNINGS=V122
 QT_INCLUDE=$$absolute_path($$dirname(QMAKE_QMAKE)/../include)
 
 PVS_CONFIG="\
@@ -169,7 +170,7 @@ isEmpty(pvs_plogs) {
     }
     !isEmpty(pvs_studio.format) {
         commands += && mv \'$$pvs_studio.log\' \'$$pvs_studio.log\'.pvs.raw \
-                    && plog-converter -t $$pvs_studio.format -o \'$$pvs_studio.log\' \'$$pvs_studio.log\'.pvs.raw
+                    && plog-converter -t $$pvs_studio.format -d \'$$SUPPRESS_WARNINGS\' -o \'$$pvs_studio.log\' \'$$pvs_studio.log\'.pvs.raw
     }
     !isEmpty(pvs_studio.output) {
         commands += && cat \'$$pvs_studio.log\' 1>&2
