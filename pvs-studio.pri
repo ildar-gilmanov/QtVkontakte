@@ -129,10 +129,10 @@ for(source, pvs_sources) {
     }
     source = $$clean_path("$$source")
     contains(source, "^.+\\.(cpp|cpp|cc|cx|cxx|cp|c\\+\\+)$") {
-        lang_flags=$$pvs_studio.cxxflags $(CXXFLAGS) $(DEFINES)
+        lang_flags=$$pvs_studio.cxxflags $(CXXFLAGS) $(DEFINES) -DPVS_STUDIO
     }
     contains(source, "^.+\\.c$") {
-        lang_flags=$$pvs_studio.cflags $(CFLAGS) $(DEFINES)
+        lang_flags=$$pvs_studio.cflags $(CFLAGS) $(DEFINES) -DPVS_STUDIO
     }
     !isEmpty(pvs_studio.license) {
         args += --lic-file \'$$pvs_studio.license\'
