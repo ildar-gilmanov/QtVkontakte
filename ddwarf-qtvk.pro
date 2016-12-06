@@ -42,4 +42,4 @@ OTHER_FILES += \
     $$PATCHES
     $$JAVA_FILES
 
-include(pvs-studio.pri)
+include(../QtPvsStudio/pvs-studio.pri)
