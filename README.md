@@ -10,6 +10,13 @@ Just navigate to /path-to-qt/android_[armv5,armv7,x86]/src/android/java/src/org/
 In Java you have to call `QtVkBinding.onCreate(this)` method inside the onCreate of main Activity.  
 In C++ you have to call `QtVk::initStatic()`.
 
+Also this library depends on [qt-pvs-studio](https://github.com/gilmanov-ildar/qt-pvs-studio.git).
+You could get these projects as git submodules:
+```
+$ git submodule add --name qt-pvs-studio https://github.com/gilmanov-ildar/qt-pvs-studio.git src/QtPvsStudio
+$ git submodule add --name qt-vk https://github.com/gilmanov-ildar/QtVkontakte.git src/QtVkontakte
+```
+
 Using
 -----
 
