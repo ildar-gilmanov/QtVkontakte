@@ -50,6 +50,7 @@ Developers
 ----------
 
 1) Gilmanov Ildar
+- Telegram: @gilmanov_ildar
 - Skype: gilmanov.ildar
 - Facebook: https://www.facebook.com/gilmanov.ildar
 - Vk: https://vk.com/gilmanov_ildar
