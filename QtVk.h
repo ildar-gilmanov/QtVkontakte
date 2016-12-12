@@ -12,7 +12,9 @@
 
 #include <QObject>
 #include <QVariantMap>
-#include <QtQml>
+
+class QQmlEngine;
+class QJSEngine;
 
 namespace DDwarf {
 namespace Social {

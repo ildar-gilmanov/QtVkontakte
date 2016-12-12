@@ -10,10 +10,12 @@
  * @author Gilmanov Ildar <dev@ddwarf.org>
  */
 
-#include "QtVk.h"
+#include <QtQml>
+#include <QDebug>
 #include <QPixmap>
 #include <QtQuick/QQuickItemGrabResult>
-#include <QDebug>
+
+#include "QtVk.h"
 
 namespace DDwarf {
 namespace Social {
@@ -25,6 +27,7 @@ void QtVk::initStatic()
     if(m_instance)
     {
         qWarning() << QString("QtVk is already initialized");
+        return;
     }
 
     m_instance = new QtVk();
