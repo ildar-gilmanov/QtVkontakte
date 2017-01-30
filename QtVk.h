@@ -72,7 +72,6 @@ private:
     static QtVk *m_instance;
 
     explicit QtVk(QObject *parent = 0);
-    ~QtVk();
 
     Q_DISABLE_COPY(QtVk)
 

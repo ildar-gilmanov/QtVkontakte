@@ -50,10 +50,6 @@ QtVk::QtVk(QObject *parent) :
 {
 }
 
-QtVk::~QtVk()
-{
-}
-
 QObject *QtVk::qtVkProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
